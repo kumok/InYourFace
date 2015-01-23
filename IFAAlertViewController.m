@@ -22,18 +22,65 @@
 }
 
 -(void)presentAlertViewController {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[self randomTitle] message:@"Pick one of 2 options" preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        NSLog(@"Okay I will cancel");
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[self randomTitle] message:@"Try your luck" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"1" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        if ([self play] == YES) {
+            [self showResults:@"You Won"];
+        }
+        else {
+            [self showResults:@"You Lose"];
+        }
     }]];
     
-    [alertController addAction:[UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        [self presentAlertViewController];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"2" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        if ([self play] == YES) {
+            [self showResults:@"You Won"];
+        }
+        else {
+            [self showResults:@"You Lose"];
+        }
     }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"3" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        if ([self play] == YES) {
+            [self showResults:@"You Won"];
+        }
+        else {
+            [self showResults:@"You Lose"];
+        }
+    }]];
+
+    
     
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+-(BOOL)play {
+    BOOL win;
+    int index = arc4random_uniform(2);
+    if (index == 1) {
+        win = YES;
+    }
+    else {
+        win = NO;
+    }
+    return win;
+}
+
+
+-(void)showResults:(NSString *)winorlose {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:winorlose message:@"Pick one of 2 options" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        NSLog(@"Byebye");
+    }]];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:@"Play Again" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self presentAlertViewController];
+        
+    }]];
+    [self presentViewController:alertController animated:YES completion:nil];
+
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
