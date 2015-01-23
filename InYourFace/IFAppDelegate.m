@@ -1,3 +1,4 @@
+
 //
 //  IFAppDelegate.m
 //  InYourFace
@@ -7,6 +8,7 @@
 //
 
 #import "IFAppDelegate.h"
+#import "IFAAlertViewController.h"
 
 @implementation IFAppDelegate
 
@@ -14,6 +16,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[IFAAlertViewController new]];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
